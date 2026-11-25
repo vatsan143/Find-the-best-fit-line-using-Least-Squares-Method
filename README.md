@@ -20,13 +20,63 @@ To implement univariate Linear Regression to fit a straight line using least squ
 ```
 /*
 Program to implement univariate Linear Regression to fit a straight line using least squares.
-Developed by: 
-RegisterNumber:  
+Developed by: SRIVATSAN G
+RegisterNumber:  212223230216
 */
+```
+```
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+try:
+    X = np.atleast_1d(np.array(eval(input("Enter X values (e.g., [1, 2, 3]): "))))
+    Y = np.atleast_1d(np.array(eval(input("Enter Y values (e.g., [2, 4, 5]): "))))
+except Exception as e:
+    print("Error parsing input. Please enter lists of numbers like [1, 2, 3]")
+    raise e
+
+if len(X) < 2:
+    print("Error: Linear regression requires at least 2 data points!")
+else:
+    
+    X_mean = np.mean(X)
+    Y_mean = np.mean(Y)
+
+    num = 0
+    denom = 0
+
+   
+    for i in range(len(X)):
+        num += (X[i] - X_mean) * (Y[i] - Y_mean)
+        denom += (X[i] - X_mean) ** 2
+
+    if denom == 0:
+        print("Error: Cannot compute slope when all X values are identical (vertical line).")
+    else:
+        m = num / denom
+        b = Y_mean - (m * X_mean)
+
+        print("Slope (m):", m, "Intercept (b):", b)
+
+        Y_predicted = m * X + b
+        print("Predicted Y values:", Y_predicted)
+
+    
+        plt.scatter(X, Y, label="Actual Data")
+        plt.plot(X, Y_predicted, color="red", label="Regression Line")
+        plt.xlabel("X")
+        plt.ylabel("Y")
+        plt.title("Linear Regression")
+        plt.legend()
+        plt.show()
 ```
 
 ## Output:
-![best fit line](sam.png)
+
+<img width="665" height="526" alt="image" src="https://github.com/user-attachments/assets/5688a004-4267-4c9f-99f2-8d332dfa0757" />
+
+
 
 
 ## Result:
